@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">App Movies</string>
+    <string name="title_popular">Popular</string>
+    <string name="title_top_rated">Top Rated</string>
+    <string name="title_upcoming">Upcoming</string>
+    <string name="option_spinner_one">Movies</string>
+    <string name="option_spinner_two">Series</string>
+
+    <string-array name="entertainment_options">
+        <item>Movies</item>
+        <item>Series</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
