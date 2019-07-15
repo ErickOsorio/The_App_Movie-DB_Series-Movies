@@ -9,14 +9,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22c29fa1-7650-44b2-bf39-f903bb04004b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/View/detailFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/View/detailFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/View/popularFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/View/popularFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/View/searchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/View/searchFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/View/topRatedFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/View/topRatedFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/View/upcomingFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/View/upcomingFragment.java" afterDir="false" />
-    </list>
+    <list default="true" id="22c29fa1-7650-44b2-bf39-f903bb04004b" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +34,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/Helper/sessionHelper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
@@ -52,6 +45,18 @@
                 <element signature="e#1405#1406#0" expanded="true" />
                 <element signature="e#1528#1529#0" expanded="true" />
                 <element signature="e#1581#1582#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/Model/popularModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="624">
+              <caret line="110" column="17" lean-forward="true" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -189,7 +194,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="807" />
@@ -685,16 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/Model/popularModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="100" column="20" lean-forward="true" selection-start-line="100" selection-start-column="20" selection-end-line="108" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="403">
@@ -873,6 +868,16 @@
             <element signature="e#1405#1406#0" expanded="true" />
             <element signature="e#1528#1529#0" expanded="true" />
             <element signature="e#1581#1582#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/eos/numbers/to/appmovies/Model/popularModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="110" column="17" lean-forward="true" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
