@@ -15,16 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.EditText;
-
 import com.eos.numbers.to.appmovies.Adapter.itemAdapter;
 import com.eos.numbers.to.appmovies.Helper.sessionHelper;
-import com.eos.numbers.to.appmovies.Interface.popularInterface;
 import com.eos.numbers.to.appmovies.Interface.searchInterface;
 import com.eos.numbers.to.appmovies.Item.itemMain;
 import com.eos.numbers.to.appmovies.Presenter.searchPresenter;
 import com.eos.numbers.to.appmovies.R;
-import com.facebook.shimmer.ShimmerFrameLayout;
-
 import java.util.ArrayList;
 import java.util.List;
 

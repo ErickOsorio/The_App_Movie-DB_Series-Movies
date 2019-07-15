@@ -16,8 +16,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.eos.numbers.to.appmovies.BaseActivity;
 import com.eos.numbers.to.appmovies.Helper.config;
 import com.eos.numbers.to.appmovies.R;
 import com.squareup.picasso.Picasso;
