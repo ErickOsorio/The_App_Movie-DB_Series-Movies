@@ -30,4 +30,14 @@ public class popularPresenter implements popularInterface.Presenter {
     public void requestResult(List<itemMain> list) {
         view.requestResult(list);
     }
+
+    @Override
+    public void startShimmer() {
+        view.startShimmer();
+    }
+
+    @Override
+    public void stopShimmer() {
+        view.stopShimmer();
+    }
 }

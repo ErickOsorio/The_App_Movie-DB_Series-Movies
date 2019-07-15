@@ -7,11 +7,15 @@ public interface popularInterface {
 
     interface View{
         void requestResult(List<itemMain> list);
+        void startShimmer();
+        void stopShimmer();
     }
 
     interface Presenter{
         void getPopularMovies(String apiKey, int page, popularInterface.Presenter presenter);
         void requestResult(List<itemMain> list);
+        void startShimmer();
+        void stopShimmer();
     }
 
     interface Model{

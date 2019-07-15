@@ -1,6 +1,5 @@
 package com.eos.numbers.to.appmovies.Model;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -8,7 +7,6 @@ import com.eos.numbers.to.appmovies.Helper.config;
 import com.eos.numbers.to.appmovies.Helper.sessionHelper;
 import com.eos.numbers.to.appmovies.Interface.popularInterface;
 import com.eos.numbers.to.appmovies.Item.itemMain;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -27,7 +25,6 @@ public class popularModel implements popularInterface.Model {
     private sessionHelper session;
     public Context context;
     private String msg;
-    ProgressDialog progressDialog = null;
 
     public popularModel(Context context) {
         this.context = context;
@@ -60,9 +57,7 @@ public class popularModel implements popularInterface.Model {
 
         @Override
         protected void onPreExecute() {
-            progressDialog = new ProgressDialog(context);
-            progressDialog.show();
-            progressDialog.setCancelable(false);
+            presenter.startShimmer();
             super.onPreExecute();
         }
 
@@ -107,7 +102,10 @@ public class popularModel implements popularInterface.Model {
                             json_data.getInt("id"),
                             (session.getMedia().equals("movie")?json_data.getString("title"):json_data.getString("original_name")),
                             json_data.getString("poster_path"),
-                            json_data.getString("vote_average"))
+                            json_data.getString("vote_average"),
+                            json_data.getString("original_language"),
+                            (session.getMedia().equals("movie")?json_data.getString("release_date"):json_data.getString("first_air_date")),
+                            json_data.getString("overview"))
                     );
 
                 }
@@ -123,7 +121,7 @@ public class popularModel implements popularInterface.Model {
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            progressDialog.dismiss();
+            presenter.stopShimmer();
             presenter.requestResult(list);
         }
     }

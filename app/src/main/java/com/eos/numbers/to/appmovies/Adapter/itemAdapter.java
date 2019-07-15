@@ -87,19 +87,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.ViewHolder> {
         void OnItemClickListener(int position, itemMain item);
     }
 
-    public void deleteItem(int index) {
-        list.remove(index);
-        notifyItemRemoved(index);
-        notifyItemRangeChanged(index, list.size());
-    }
-
-    public void deleteAllItem(){
-        list.clear();
-        notifyDataSetChanged();
-    }
-
     public void addAll(List<itemMain> productsItems){
-        list.clear();
         list.addAll(productsItems);
         notifyDataSetChanged();
     }

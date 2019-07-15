@@ -6,17 +6,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.Spinner;
 
 import com.eos.numbers.to.appmovies.Helper.sessionHelper;
+import com.eos.numbers.to.appmovies.View.detailFragment;
 import com.eos.numbers.to.appmovies.View.popularFragment;
+import com.eos.numbers.to.appmovies.View.searchFragment;
 import com.eos.numbers.to.appmovies.View.topRatedFragment;
 import com.eos.numbers.to.appmovies.View.upcomingFragment;
 
@@ -24,6 +23,7 @@ import com.eos.numbers.to.appmovies.View.upcomingFragment;
 public class BaseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     public BottomNavigationView navView;
     public sessionHelper session;
+    public int aux;
     private String apyKey = "507bdb7ddb70b2a85302d3357bc258d9";
     private String language = "es-mx";
     private Spinner options;
@@ -38,17 +38,25 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
             Fragment fragment = null;
 
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_popular:
                     navView.setItemBackgroundResource(R.color.colorPrimary);
                     fragment = new popularFragment();
+                    aux = 0;
                     break;
-                case R.id.navigation_dashboard:
-                    navView.setItemBackgroundResource(R.color.colorRed500);
-                    fragment = new topRatedFragment();
+                case R.id.navigation_top:
+                    navView.setItemBackgroundResource(R.color.colorPrimary);
+                    fragment = new topRatedFragment();aux = item.getItemId();
+                    aux = 1;
                     break;
-                case R.id.navigation_notifications:
-                    navView.setItemBackgroundResource(R.color.colorBrown500);
+                case R.id.navigation_upcoming:
+                    navView.setItemBackgroundResource(R.color.colorPrimary);
                     fragment = new upcomingFragment();
+                    aux = 2;
+                    break;
+                case R.id.navigation_search:
+                    navView.setItemBackgroundResource(R.color.colorPrimary);
+                    fragment = new searchFragment();
+                    aux = 3;
                     break;
 
             }
@@ -73,19 +81,17 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
         loadFragment(new popularFragment());
 
         options = findViewById(R.id.spinner_options);
-        String vl;
-        vl = session.getMedia();
-        if (session.getMedia().equals("movie")){
-            options.setSelection(0, true);
-        } else {
-            options.setSelection(1, true);
-        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 getSupportActionBar().getThemedContext(),
                 R.layout.appbar_filter_title, getResources().getStringArray(R.array.entertainment_options));
         adapter.setDropDownViewResource(R.layout.appbar_filter_list);
         options.setAdapter(adapter);
+        if (session.getMedia().equals("movie")) {
+            options.setSelection(0);
+        } else {
+            options.setSelection(1);
+        }
         options.setOnItemSelectedListener(this);
 
 
@@ -119,30 +125,29 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        int count = getSupportFragmentManager().getBackStackEntryCount();
-        Log.e("POS",""+position);
         if (position == 0) {
             session.setMedia("movie");
-            Log.e("COUNT",""+count);
-//                    if (count == 1){
-            loadFragment(new popularFragment());
-//                    } else if (count == 2){
-//                        loadFragment(new topRatedFragment());
-//                    } else {
-//                        loadFragment(new upcomingFragment());
-//                    }
-
+            if (aux == 0){
+                loadFragment(new popularFragment());
+            } else if (aux == 1){
+                loadFragment(new topRatedFragment());
+            } else if (aux == 2){
+                loadFragment(new upcomingFragment());
+            } else {
+                loadFragment(new searchFragment());
+            }
 
         } else {
             session.setMedia("tv");
-            Log.e("COUNT",""+count);
-//                    if (count == 1){
-            loadFragment(new popularFragment());
-//                    } else if (count == 2){
-//                        loadFragment(new topRatedFragment());
-//                    } else {
-//                        loadFragment(new upcomingFragment());
-//                    }
+            if (aux == 0){
+                loadFragment(new popularFragment());
+            } else if (aux == 1){
+                loadFragment(new topRatedFragment());
+            } else if (aux == 2){
+                loadFragment(new upcomingFragment());
+            } else {
+                loadFragment(new searchFragment());
+            }
         }
     }
 

@@ -6,12 +6,18 @@ public class itemMain {
     public String title;
     public String poster;
     public String votes;
+    public String language;
+    public String date;
+    public String overview;
 
-    public itemMain(int id, String title, String poster, String votes) {
+    public itemMain(int id, String title, String poster, String votes, String language, String date, String overview) {
         this.id = id;
         this.title = title;
         this.poster = poster;
         this.votes = votes;
+        this.language = language;
+        this.date = date;
+        this.overview = overview;
     }
 
     public int getId() {
@@ -44,5 +50,29 @@ public class itemMain {
 
     public void setVotes(String votes) {
         this.votes = votes;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 }
