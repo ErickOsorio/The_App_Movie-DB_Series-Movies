@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.eos.numbers.to.appmovies.Helper.config;
 import com.eos.numbers.to.appmovies.Item.itemMain;
 import com.eos.numbers.to.appmovies.R;

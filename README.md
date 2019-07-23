@@ -38,8 +38,6 @@ upcomingPresenter	- clase que se encarga en de interarctuar con la vista y el mo
 itemAdapter		- clase que se encarga de poblar el recyclerview 
 
 
-
-
 ### Preguntas
 
 1. En qué consiste el principio de responsabilidad única? Cuál es su propósito?

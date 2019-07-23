@@ -26,81 +26,194 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="15dp">
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="220dp" />
-
-            <TextView
-                android:id="@+id/textViewTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Spider Man lejos de casa"
-                android:fontFamily="@font/raleway_regular"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/color_text"
-                android:maxLines="1"
-                android:ellipsize="end"/>
-
-            <TextView
-                android:id="@+id/textViewDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="2019-06-28"
-                android:fontFamily="@font/raleway_regular"
-                android:textSize="16sp"
-                android:textColor="@color/color_text"
-                android:maxLines="1"
-                android:ellipsize="end"/>
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite">
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/video"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:weightSum="2">
+                android:layout_height="220dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <FrameLayout
+                    android:id="@+id/youtubeFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment">
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-
-                        android:src="@drawable/ic_star_black"/>
+                        android:id="@+id/image"
+                        android:layout_width="140dp"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"/>
 
                     <TextView
-                        android:id="@+id/textViewVotes"
+                        android:id="@+id/textViewTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="7.8"
+                        android:text="Spider Man lejos de casa"
+                        android:fontFamily="@font/raleway_regular"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/color_text"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+
+                    <TextView
+                        android:id="@+id/textViewDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2019-06-28"
                         android:fontFamily="@font/raleway_regular"
                         android:textSize="16sp"
-                        android:textColor="@color/color_text"
+                        android:textColor="@color/color_text_1"
                         android:maxLines="1"
                         android:ellipsize="end"/>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="horizontal"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_height="1px"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/color_text_1"/>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_star_black"/>
+
+                            <TextView
+                                android:id="@+id/textViewVotes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="7.8"
+                                android:fontFamily="@font/raleway_regular"
+                                android:textSize="16sp"
+                                android:textColor="@color/color_text_1"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/textView_text"
+                                android:fontFamily="@font/raleway_regular"
+                                android:textSize="16sp"
+                                android:textColor="@color/color_text"
+                                android:textStyle="bold"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+
+                            <TextView
+                                android:id="@+id/textViewLan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="en"
+                                android:fontFamily="@font/raleway_regular"
+                                android:textSize="16sp"
+                                android:textColor="@color/color_text_1"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/color_text_1"/>
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/textView_title_desc"
+                            android:fontFamily="@font/raleway_regular"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="16sp"
+                            android:textColor="@color/color_text"
+                            android:textStyle="bold"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
+
+                        <TextView
+                            android:id="@+id/textViewOverview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Peter Parker decide irse junto a Michelle Jones, Ned y el resto de sus amigos a pasar unas vacaciones a Europa después de los eventos ocurridos en Vengadores: EndGame. Sin embargo, el plan de Parker por dejar de lado sus superpoderes durante unas semanas se ven truncados cuándo es reclutado por Nick Fury para unirse a Mysterio (un humano que proviene de la Tierra 833, una dimensión del Multiverso, que tuvo su primera aparición en Doctor Strange) para luchar contra los Elementales (cuatro entes inmortales que vienen de la misma dimensión y que dominan los cuatro elementos de la Naturaleza, el fuego, el agua, el aire y la tierra) . En ese momento, Parker vuelve a ponerse el traje de Spider-Man para cumplir con su labor."
+                            android:fontFamily="@font/raleway_regular"
+                            android:textSize="16sp"
+                            android:textColor="@color/color_text_1"
+                            android:maxLines="20"
+                            android:ellipsize="end"/>
+
+                    </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/color_text_1"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/textView_text"
+                        android:text="@string/textView_title_genr"
                         android:fontFamily="@font/raleway_regular"
                         android:textSize="16sp"
                         android:textColor="@color/color_text"
@@ -109,38 +222,17 @@
                         android:ellipsize="end"/>
 
                     <TextView
-                        android:id="@+id/textViewLan"
+                        android:id="@+id/textViewGenres"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="en"
+                        android:text=""
                         android:fontFamily="@font/raleway_regular"
                         android:textSize="16sp"
-                        android:textColor="@color/color_text"
+                        android:textColor="@color/color_text_1"
                         android:maxLines="1"
                         android:ellipsize="end"/>
 
                 </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp">
-
-                <TextView
-                    android:id="@+id/textViewOverview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Peter Parker decide irse junto a Michelle Jones, Ned y el resto de sus amigos a pasar unas vacaciones a Europa después de los eventos ocurridos en Vengadores: EndGame. Sin embargo, el plan de Parker por dejar de lado sus superpoderes durante unas semanas se ven truncados cuándo es reclutado por Nick Fury para unirse a Mysterio (un humano que proviene de la Tierra 833, una dimensión del Multiverso, que tuvo su primera aparición en Doctor Strange) para luchar contra los Elementales (cuatro entes inmortales que vienen de la misma dimensión y que dominan los cuatro elementos de la Naturaleza, el fuego, el agua, el aire y la tierra) . En ese momento, Parker vuelve a ponerse el traje de Spider-Man para cumplir con su labor."
-                    android:fontFamily="@font/raleway_regular"
-                    android:textSize="16sp"
-                    android:textColor="@color/color_text"
-                    android:maxLines="20"
-                    android:ellipsize="end"/>
 
             </LinearLayout>
 

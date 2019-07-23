@@ -6,11 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.eos.numbers.to.appmovies.Helper.sessionHelper;
 import com.eos.numbers.to.appmovies.View.detailFragment;
@@ -24,8 +27,8 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
     public BottomNavigationView navView;
     public sessionHelper session;
     public int aux;
-    private String apyKey = "507bdb7ddb70b2a85302d3357bc258d9";
-    private String language = "es-mx";
+    private String apyKey;
+    private String language;
     private Spinner options;
     private Toolbar toolbar;
 
@@ -70,9 +73,10 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        apyKey = getResources().getString(R.string.api_key);
         session = new sessionHelper(getApplication());
         session.setApykey(apyKey);
-        session.setLanguage(language);
+
 
         toolbar = findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
@@ -92,6 +96,7 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
         } else {
             options.setSelection(1);
         }
+
         options.setOnItemSelectedListener(this);
 
 
@@ -159,7 +164,24 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
      * @param parent The AdapterView that now contains no selected item.
      */
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent) { }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_language, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String[] lang = getResources().getStringArray(R.array.language);
+        if (item.getItemId() == R.id.spanish) {
+            language = lang[0];
+            session.setLanguage(language);
+        }else{
+            language = lang[1];
+            session.setLanguage(language);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -63,6 +63,7 @@ public class searchFragment extends Fragment implements searchInterface.View, Te
             @Override
             public void OnItemClickListener(int position, itemMain item) {
                 Bundle bundle = new Bundle();
+                bundle.putInt("id", item.getId());
                 bundle.putString("title", item.getTitle());
                 bundle.putString("poster", item.getPoster());
                 bundle.putString("votes", item.getVotes());

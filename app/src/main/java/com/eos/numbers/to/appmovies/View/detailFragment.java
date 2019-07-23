@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -17,21 +18,28 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.eos.numbers.to.appmovies.Helper.config;
+import com.eos.numbers.to.appmovies.Interface.detailInterface;
 import com.eos.numbers.to.appmovies.R;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class detailFragment extends DialogFragment {
+public class detailFragment extends DialogFragment implements detailInterface.View {
 
     public detailFragment() {
         // Required empty public constructor
     }
 
     private ImageView imageView;
-    public TextView textViewTitle, textViewDate, textViewVotes, textViewLanguage, textViewOverview;
-    public String image, title, date, votes, language, overview;
+    public TextView textViewTitle, textViewDate, textViewVotes,
+            textViewLanguage, textViewOverview, textViewGenres;
+    public String id, image, title, date, votes, language, overview;
+    private YouTubePlayer youTubePlayer;
+    private YouTubePlayerSupportFragment youTubePlayerFragment;
     private Toolbar toolbar;
     public View rootView;
 
@@ -58,6 +66,7 @@ public class detailFragment extends DialogFragment {
 
         Bundle bundle= this.getArguments();
         if (bundle != null){
+            id = bundle.getString("id");
             title = bundle.getString("title");
             image = bundle.getString("poster");
             votes = bundle.getString("votes");
@@ -73,9 +82,12 @@ public class detailFragment extends DialogFragment {
         textViewLanguage = rootView.findViewById(R.id.textViewLan);
         textViewVotes = rootView.findViewById(R.id.textViewVotes);
         textViewOverview = rootView.findViewById(R.id.textViewOverview);
+        textViewGenres = rootView.findViewById(R.id.textViewGenres);
 
         Picasso.get()
                 .load(config.getUrlImages()+image)
+                .resize(6000, 2000)
+                .onlyScaleDown()
                 .into(imageView);
 
         textViewTitle.setText(title);
@@ -83,6 +95,29 @@ public class detailFragment extends DialogFragment {
         textViewVotes.setText(votes);
         textViewLanguage.setText(language);
         textViewOverview.setText(overview);
+
+        youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.youtubeFragment, youTubePlayerFragment).commit();
+
+        youTubePlayerFragment.initialize(getResources().getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider arg0, YouTubePlayer yplayer, boolean b) {
+                if (!b) {
+                    youTubePlayer = yplayer;
+                    youTubePlayer.setFullscreen(false);
+                    //youTubePlayer.loadVideo("eh_qPcQoFK0");
+                    youTubePlayer.cueVideo("eh_qPcQoFK0");
+                }
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider arg0, YouTubeInitializationResult arg1) {
+
+            }
+        });
+
+
 
         return rootView;
     }
@@ -119,4 +154,8 @@ public class detailFragment extends DialogFragment {
         }
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
 }
