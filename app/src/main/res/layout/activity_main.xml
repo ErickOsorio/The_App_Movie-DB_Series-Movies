@@ -36,7 +36,7 @@
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
+            android:background="@color/colorPrimary"
             app:itemBackground="@color/colorPrimary"
             app:itemIconTint="@color/bottomview_color_state_list"
             app:itemTextColor="@color/bottomview_color_state_list"

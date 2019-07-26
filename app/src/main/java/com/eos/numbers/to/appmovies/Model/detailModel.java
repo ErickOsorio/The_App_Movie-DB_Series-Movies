@@ -9,17 +9,21 @@ import com.eos.numbers.to.appmovies.Helper.sessionHelper;
 import com.eos.numbers.to.appmovies.Interface.detailInterface;
 import com.eos.numbers.to.appmovies.Item.itemDetail;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.HttpRetryException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +39,7 @@ public class detailModel implements detailInterface.Model {
     }
 
     @Override
-    public void getDetails(String apiKey, int id, String append_to_response, detailInterface.Presenter presenter) {
+    public void getDetails(String apiKey, int id, detailInterface.Presenter presenter) {
         new asyncHttpRequestManager(this.context, config.getUrl() + session.getMedia() + "/" + id, apiKey, "en-US", "videos", presenter).execute();
     }
 
@@ -45,8 +49,8 @@ public class detailModel implements detailInterface.Model {
         private String url;
         private String apiKey;
         private String language;
-        private List<itemDetail> list;
         private String append_to_response;
+        private List<String> genres, videos;
         private detailInterface.Presenter presenter;
 
         public asyncHttpRequestManager(Context context, String url, String apiKey, String language, String append_to_response, detailInterface.Presenter mPresenter) {
@@ -83,29 +87,37 @@ public class detailModel implements detailInterface.Model {
             int codeResponse = 200;
             try {
                 List<NameValuePair> param = new ArrayList<NameValuePair>();
-                list = new ArrayList<>();
+                genres = new ArrayList<>();
+                videos = new ArrayList<>();
                 param.add(new BasicNameValuePair("api_key",this.apiKey));
                 param.add(new BasicNameValuePair("language",this.language));
-                param.add(new BasicNameValuePair("append_to_response",""+this.append_to_response));
+                param.add(new BasicNameValuePair("append_to_response",this.append_to_response));
                 final HttpClient client = new DefaultHttpClient();
-                HttpPost post = new HttpPost(url);
-                post.setEntity(new UrlEncodedFormEntity(param));
-                HttpResponse res = client.execute(post);
+                String paramString = URLEncodedUtils.format( param, "UTF-8" );
+                url += "?" + paramString;
+                HttpGet httpGet = new HttpGet(url);
+                HttpResponse httpResponse = client.execute(httpGet);
+                HttpEntity httpEntity = httpResponse.getEntity();
+                response = EntityUtils.toString(httpEntity);
 
-                response = EntityUtils.toString(res.getEntity());
+                JSONObject json = new JSONObject(response);
+                JSONArray jArray = json.getJSONArray("genres");
 
-                /*JSONObject json = new JSONObject(response);
-                JSONObject jsonObject = json.getJSONObject("genres");
 
-                for(int i=0; i<jsonObject.length(); i++){
-                    JSONObject json_data = jsonObject.getJSONObject(i);
+                for(int i=0; i<jArray.length(); i++){
+                    JSONObject json_data = jArray.getJSONObject(i);
+                    genres.add(json_data.getString("name"));
 
-                    list.add(new itemDetail(
-                            json_data.getString("name"),
-                            (session.getMedia().equals("movie")?json_data.getString("title"):json_data.getString("original_name"))
-                    );
+                }
 
-                }*/
+                JSONObject jsonObject = json.getJSONObject("videos");
+                JSONArray jsonArray = jsonObject.getJSONArray("results");
+
+                for(int i=0; i<jsonArray.length(); i++){
+                    JSONObject json_data = jsonArray.getJSONObject(i);
+                    videos.add(json_data.getString("key"));
+
+                }
 
             }catch (Exception e){
                 Log.e("json",e.getMessage());
@@ -118,6 +130,13 @@ public class detailModel implements detailInterface.Model {
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
+
+            if (integer == 500){
+
+                return;
+            }
+           presenter.requestResult(genres, videos);
+
         }
     }
 

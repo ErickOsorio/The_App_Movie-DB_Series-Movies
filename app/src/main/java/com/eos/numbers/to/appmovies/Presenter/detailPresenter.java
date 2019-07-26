@@ -5,6 +5,8 @@ import android.content.Context;
 import com.eos.numbers.to.appmovies.Interface.detailInterface;
 import com.eos.numbers.to.appmovies.Model.detailModel;
 
+import java.util.List;
+
 public class detailPresenter implements detailInterface.Presenter {
 
     private detailInterface.View view;
@@ -18,7 +20,12 @@ public class detailPresenter implements detailInterface.Presenter {
     }
 
     @Override
-    public void getDetails(String apiKey, int id, String append_to_response, detailInterface.Presenter presenter) {
-        model.getDetails(apiKey,id,append_to_response,presenter);
+    public void getDetails(String apiKey, int id, detailInterface.Presenter presenter) {
+        model.getDetails(apiKey,id, presenter);
+    }
+
+    @Override
+    public void requestResult(List<String> genres, List<String> videos) {
+        view.requestResult(genres, videos);
     }
 }

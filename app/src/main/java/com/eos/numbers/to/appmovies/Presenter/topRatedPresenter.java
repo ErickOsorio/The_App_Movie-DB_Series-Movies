@@ -39,4 +39,9 @@ public class topRatedPresenter implements topRatedInterface.Presenter {
     public void stopShimmer() {
         view.stopShimmer();
     }
+
+    @Override
+    public void messageNoData(boolean isVisible) {
+        view.messageNoData(isVisible);
+    }
 }

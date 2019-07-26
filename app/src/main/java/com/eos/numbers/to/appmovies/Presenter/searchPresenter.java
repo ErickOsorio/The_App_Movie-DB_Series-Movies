@@ -31,4 +31,9 @@ public class searchPresenter implements searchInterface.Presenter{
     public void requestResult(List<itemMain> list) {
         view.requestResult(list);
     }
+
+    @Override
+    public void messageNoData(boolean isVisible) {
+        view.messageNoData(isVisible);
+    }
 }

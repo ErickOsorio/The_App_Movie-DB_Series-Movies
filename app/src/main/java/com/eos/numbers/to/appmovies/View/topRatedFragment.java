@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.LinearLayout;
+
 import com.eos.numbers.to.appmovies.Adapter.itemAdapter;
 import com.eos.numbers.to.appmovies.Helper.sessionHelper;
 import com.eos.numbers.to.appmovies.Interface.topRatedInterface;
@@ -35,6 +37,7 @@ public class topRatedFragment extends Fragment implements topRatedInterface.View
     public itemAdapter adapter;
     public RecyclerView recyclerViewTopRated;
     public GridLayoutManager layoutManager;
+    public LinearLayout linearLayoutData;
     public List<itemMain> list;
     private sessionHelper session;
     private ShimmerFrameLayout shimmerFrameLayout;
@@ -57,6 +60,7 @@ public class topRatedFragment extends Fragment implements topRatedInterface.View
         list = new ArrayList<>();
         recyclerViewTopRated = root.findViewById(R.id.recyclerViewTopRated);
         shimmerFrameLayout = root.findViewById(R.id.shimmer_top_rated);
+        linearLayoutData = root.findViewById(R.id.linearLayoutMessageNoData);
         adapter = new itemAdapter(list, new itemAdapter.OnItemClickListener() {
             @Override
             public void OnItemClickListener(int position, itemMain item) {
@@ -133,4 +137,10 @@ public class topRatedFragment extends Fragment implements topRatedInterface.View
         shimmerFrameLayout.stopShimmerAnimation();
         shimmerFrameLayout.setVisibility(View.GONE);
     }
+
+    @Override
+    public void messageNoData(boolean isVisible) {
+        linearLayoutData.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
 }

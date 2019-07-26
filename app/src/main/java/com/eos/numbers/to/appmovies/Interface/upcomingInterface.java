@@ -10,6 +10,7 @@ public interface upcomingInterface {
         void requestResult(List<itemMain> list);
         void startShimmer();
         void stopShimmer();
+        void messageNoData(boolean isVisible);
     }
 
     interface Presenter{
@@ -17,6 +18,7 @@ public interface upcomingInterface {
         void requestResult(List<itemMain> list);
         void startShimmer();
         void stopShimmer();
+        void messageNoData(boolean isVisible);
     }
 
     interface Model{

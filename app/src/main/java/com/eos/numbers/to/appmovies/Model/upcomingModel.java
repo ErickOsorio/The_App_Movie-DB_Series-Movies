@@ -127,6 +127,11 @@ public class upcomingModel implements upcomingInterface.Model {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             presenter.stopShimmer();
+            if (integer == 500){
+                presenter.messageNoData(true);
+                return;
+            }
+            presenter.messageNoData(false);
             presenter.requestResult(list);
         }
     }

@@ -34,17 +34,43 @@
             android:layout_below="@+id/editTextSearch"/>
 
         <LinearLayout
-            android:id="@+id/linearLayoutMessage"
+            android:orientation="vertical"
+            android:id="@+id/linearLayoutMessageNoData"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:gravity="center">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text_message"
+                android:fontFamily="@font/raleway_regular"
+                android:textSize="16sp"
+                android:textColor="@color/color_text_1"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/linearLayoutMessageNoNetwork"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:src="@drawable/ic_cloud_off"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/message_network"
                 android:fontFamily="@font/raleway_regular"
                 android:textSize="16sp"
                 android:textColor="@color/color_text_1"

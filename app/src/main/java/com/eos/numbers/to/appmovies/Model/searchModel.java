@@ -136,6 +136,11 @@ public class searchModel implements searchInterface.Model {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             progressDialog.hide();
+            if (integer == 500){
+                presenter.messageNoData(true);
+                return;
+            }
+            presenter.messageNoData(false);
             presenter.requestResult(list);
         }
     }

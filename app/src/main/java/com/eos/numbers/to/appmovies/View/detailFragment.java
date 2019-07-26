@@ -18,12 +18,17 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.eos.numbers.to.appmovies.Helper.config;
+import com.eos.numbers.to.appmovies.Helper.sessionHelper;
 import com.eos.numbers.to.appmovies.Interface.detailInterface;
+import com.eos.numbers.to.appmovies.Presenter.detailPresenter;
 import com.eos.numbers.to.appmovies.R;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,10 +42,14 @@ public class detailFragment extends DialogFragment implements detailInterface.Vi
     private ImageView imageView;
     public TextView textViewTitle, textViewDate, textViewVotes,
             textViewLanguage, textViewOverview, textViewGenres;
-    public String id, image, title, date, votes, language, overview;
+    public int id;
+    public String image, title, date, votes, language, overview, genre = "";
     private YouTubePlayer youTubePlayer;
     private YouTubePlayerSupportFragment youTubePlayerFragment;
     private Toolbar toolbar;
+    private sessionHelper session;
+    private List<String> generos;
+    private detailInterface.Presenter presenter;
     public View rootView;
 
     @Override
@@ -62,11 +71,13 @@ public class detailFragment extends DialogFragment implements detailInterface.Vi
                 dismiss();
             }
         });
-
+        presenter = new detailPresenter(this, getContext());
+        session = new sessionHelper(getActivity());
+        generos = new ArrayList<>();
 
         Bundle bundle= this.getArguments();
         if (bundle != null){
-            id = bundle.getString("id");
+            id = bundle.getInt("id");
             title = bundle.getString("title");
             image = bundle.getString("poster");
             votes = bundle.getString("votes");
@@ -96,28 +107,8 @@ public class detailFragment extends DialogFragment implements detailInterface.Vi
         textViewLanguage.setText(language);
         textViewOverview.setText(overview);
 
-        youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(R.id.youtubeFragment, youTubePlayerFragment).commit();
 
-        youTubePlayerFragment.initialize(getResources().getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider arg0, YouTubePlayer yplayer, boolean b) {
-                if (!b) {
-                    youTubePlayer = yplayer;
-                    youTubePlayer.setFullscreen(false);
-                    //youTubePlayer.loadVideo("eh_qPcQoFK0");
-                    youTubePlayer.cueVideo("eh_qPcQoFK0");
-                }
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider arg0, YouTubeInitializationResult arg1) {
-
-            }
-        });
-
-
+        presenter.getDetails(session.getApykey(),id, presenter);
 
         return rootView;
     }
@@ -157,5 +148,39 @@ public class detailFragment extends DialogFragment implements detailInterface.Vi
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void requestResult(List<String> genres, final List<String> videos) {
+        generos.addAll(genres);
+
+        youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.youtubeFragment, youTubePlayerFragment).commit();
+
+        youTubePlayerFragment.initialize(getResources().getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider arg0, YouTubePlayer yplayer, boolean b) {
+                if (!b) {
+                    youTubePlayer = yplayer;
+                    youTubePlayer.setFullscreen(false);
+                    //youTubePlayer.loadVideo("eh_qPcQoFK0");
+                    youTubePlayer.cueVideo(videos.size() == 0 ? "eh_qPcQoFK0": videos.get(0));
+                }
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider arg0, YouTubeInitializationResult arg1) {
+
+            }
+        });
+
+        for (String s : genres)
+        {
+            genre += s + ", ";
+        }
+
+        textViewGenres.setText(genre);
+
     }
 }

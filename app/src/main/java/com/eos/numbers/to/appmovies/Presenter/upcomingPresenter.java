@@ -38,4 +38,9 @@ public class upcomingPresenter implements upcomingInterface.Presenter{
     public void stopShimmer() {
         view.stopShimmer();
     }
+
+    @Override
+    public void messageNoData(boolean isVisible) {
+        view.messageNoData(isVisible);
+    }
 }

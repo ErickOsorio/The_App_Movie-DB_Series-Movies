@@ -8,11 +8,13 @@ public interface searchInterface {
 
     interface View{
         void requestResult(List<itemMain> list);
+        void messageNoData(boolean isVisible);
     }
 
     interface Presenter{
         void getSearch(String apiKey, String query, int page, searchInterface.Presenter presenter);
         void requestResult(List<itemMain> list);
+        void messageNoData(boolean isVisible);
     }
 
     interface Model{

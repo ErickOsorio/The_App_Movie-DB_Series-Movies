@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+
 import com.eos.numbers.to.appmovies.Adapter.itemAdapter;
 import com.eos.numbers.to.appmovies.Helper.sessionHelper;
 import com.eos.numbers.to.appmovies.Interface.searchInterface;
@@ -37,6 +39,7 @@ public class searchFragment extends Fragment implements searchInterface.View, Te
     public itemAdapter adapter;
     public RecyclerView recyclerViewSearch;
     public GridLayoutManager layoutManager;
+    public LinearLayout linearLayoutData;
     public List<itemMain> list;
     private sessionHelper session;
     public EditText editTextBusqueda;
@@ -59,6 +62,7 @@ public class searchFragment extends Fragment implements searchInterface.View, Te
 
         list = new ArrayList<>();
         recyclerViewSearch = root.findViewById(R.id.recyclerViewSearch);
+        linearLayoutData = root.findViewById(R.id.linearLayoutMessageNoData);
         adapter = new itemAdapter(list, new itemAdapter.OnItemClickListener() {
             @Override
             public void OnItemClickListener(int position, itemMain item) {
@@ -124,6 +128,11 @@ public class searchFragment extends Fragment implements searchInterface.View, Te
     @Override
     public void requestResult(List<itemMain> list) {
         adapter.addAll(list);
+    }
+
+    @Override
+    public void messageNoData(boolean isVisible) {
+        linearLayoutData.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     @Override

@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.LinearLayout;
+
 import com.eos.numbers.to.appmovies.Adapter.itemAdapter;
 import com.eos.numbers.to.appmovies.Helper.sessionHelper;
 import com.eos.numbers.to.appmovies.Interface.popularInterface;
@@ -36,6 +38,7 @@ public class popularFragment extends Fragment implements popularInterface.View {
     public itemAdapter adapter;
     public RecyclerView recyclerViewPopular;
     public GridLayoutManager layoutManager;
+    public LinearLayout linearLayoutNetwork, linearLayoutData;
     public List<itemMain> list;
     private sessionHelper session;
     private ShimmerFrameLayout shimmerFrameLayout;
@@ -57,6 +60,8 @@ public class popularFragment extends Fragment implements popularInterface.View {
         list = new ArrayList<>();
         recyclerViewPopular = root.findViewById(R.id.recyclerViewPopular);
         shimmerFrameLayout = root.findViewById(R.id.shimmer_popular);
+        linearLayoutNetwork = root.findViewById(R.id.linearLayoutMessageNoNetwork);
+        linearLayoutData = root.findViewById(R.id.linearLayoutMessageNoData);
         adapter = new itemAdapter(list, new itemAdapter.OnItemClickListener() {
             @Override
             public void OnItemClickListener(int position, itemMain item) {
@@ -136,4 +141,10 @@ public class popularFragment extends Fragment implements popularInterface.View {
         shimmerFrameLayout.stopShimmerAnimation();
         shimmerFrameLayout.setVisibility(View.GONE);
     }
+
+    @Override
+    public void messageNoData(boolean isVisible) {
+        linearLayoutData.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
 }
